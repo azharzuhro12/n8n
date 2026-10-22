@@ -1,0 +1,304 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="916pt" height="967pt" viewBox="0.00 0.00 916.00 967.00">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 963.2)">
+<title>G</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-963.2 912,-963.2 912,4 -4,4"/>
+<g id="clust1" class="cluster">
+<title>cluster_in</title>
+<path fill="none" stroke="#888888" stroke-dasharray="5,2" d="M158,-874.4C158,-874.4 551,-874.4 551,-874.4 557,-874.4 563,-880.4 563,-886.4 563,-886.4 563,-939.2 563,-939.2 563,-945.2 557,-951.2 551,-951.2 551,-951.2 158,-951.2 158,-951.2 152,-951.2 146,-945.2 146,-939.2 146,-939.2 146,-886.4 146,-886.4 146,-880.4 152,-874.4 158,-874.4"/>
+<text xml:space="preserve" text-anchor="middle" x="354.5" y="-934.6" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">1. INPUT DATA</text>
+</g>
+<g id="clust2" class="cluster">
+<title>cluster_m</title>
+<path fill="none" stroke="#888888" stroke-dasharray="5,2" d="M578,-239.8C578,-239.8 888,-239.8 888,-239.8 894,-239.8 900,-245.8 900,-251.8 900,-251.8 900,-543.4 900,-543.4 900,-549.4 894,-555.4 888,-555.4 888,-555.4 578,-555.4 578,-555.4 572,-555.4 566,-549.4 566,-543.4 566,-543.4 566,-251.8 566,-251.8 566,-245.8 572,-239.8 578,-239.8"/>
+<text xml:space="preserve" text-anchor="middle" x="733" y="-538.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">2. MATCHING ENGINE</text>
+</g>
+<g id="clust3" class="cluster">
+<title>cluster_t</title>
+<path fill="none" stroke="#888888" stroke-dasharray="5,2" d="M20,-432.6C20,-432.6 422,-432.6 422,-432.6 428,-432.6 434,-438.6 434,-444.6 434,-444.6 434,-776.4 434,-776.4 434,-782.4 428,-788.4 422,-788.4 422,-788.4 20,-788.4 20,-788.4 14,-788.4 8,-782.4 8,-776.4 8,-776.4 8,-444.6 8,-444.6 8,-438.6 14,-432.6 20,-432.6"/>
+<text xml:space="preserve" text-anchor="middle" x="221" y="-771.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">3. TRIGGER REMINDER</text>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_n</title>
+<path fill="none" stroke="#888888" stroke-dasharray="5,2" d="M94,-170.8C94,-170.8 355,-170.8 355,-170.8 361,-170.8 367,-176.8 367,-182.8 367,-182.8 367,-379.4 367,-379.4 367,-385.4 361,-391.4 355,-391.4 355,-391.4 94,-391.4 94,-391.4 88,-391.4 82,-385.4 82,-379.4 82,-379.4 82,-182.8 82,-182.8 82,-176.8 88,-170.8 94,-170.8"/>
+<text xml:space="preserve" text-anchor="middle" x="224.5" y="-374.8" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">4. NOTIFIKASI</text>
+</g>
+<g id="clust5" class="cluster">
+<title>cluster_r</title>
+<path fill="none" stroke="#888888" stroke-dasharray="5,2" d="M271,-8C271,-8 541,-8 541,-8 547,-8 553,-14 553,-20 553,-20 553,-141.8 553,-141.8 553,-147.8 547,-153.8 541,-153.8 541,-153.8 271,-153.8 271,-153.8 265,-153.8 259,-147.8 259,-141.8 259,-141.8 259,-20 259,-20 259,-14 265,-8 271,-8"/>
+<text xml:space="preserve" text-anchor="middle" x="406" y="-137.2" font-family="Helvetica,sans-Serif" font-weight="bold" font-size="14.00">5. LAPORAN MANAJEMEN</text>
+</g>
+<!-- cand -->
+<g id="node1" class="node">
+<title>cand</title>
+<path fill="#eaf0fa" stroke="#1f3864" stroke-width="1.2" d="M543.41,-918.4C543.41,-918.4 346.59,-918.4 346.59,-918.4 340.59,-918.4 334.59,-912.4 334.59,-906.4 334.59,-906.4 334.59,-894.4 334.59,-894.4 334.59,-888.4 340.59,-882.4 346.59,-882.4 346.59,-882.4 543.41,-882.4 543.41,-882.4 549.41,-882.4 555.41,-888.4 555.41,-894.4 555.41,-894.4 555.41,-906.4 555.41,-906.4 555.41,-912.4 549.41,-918.4 543.41,-918.4"/>
+<text xml:space="preserve" text-anchor="middle" x="445" y="-903.7" font-family="Helvetica,sans-Serif" font-size="11.00">Data Kandidat</text>
+<text xml:space="preserve" text-anchor="middle" x="445" y="-890.5" font-family="Helvetica,sans-Serif" font-size="11.00">(Google Sheets / CSV / form pendaftaran)</text>
+</g>
+<!-- ingest -->
+<g id="node4" class="node">
+<title>ingest</title>
+<path fill="#eaf0fa" stroke="#1f3864" stroke-width="1.2" d="M531.48,-849.4C531.48,-849.4 358.52,-849.4 358.52,-849.4 352.52,-849.4 346.52,-843.4 346.52,-837.4 346.52,-837.4 346.52,-825.4 346.52,-825.4 346.52,-819.4 352.52,-813.4 358.52,-813.4 358.52,-813.4 531.48,-813.4 531.48,-813.4 537.48,-813.4 543.48,-819.4 543.48,-825.4 543.48,-825.4 543.48,-837.4 543.48,-837.4 543.48,-843.4 537.48,-849.4 531.48,-849.4"/>
+<text xml:space="preserve" text-anchor="middle" x="445" y="-834.7" font-family="Helvetica,sans-Serif" font-size="11.00">Ingest &amp; Validasi</text>
+<text xml:space="preserve" text-anchor="middle" x="445" y="-821.5" font-family="Helvetica,sans-Serif" font-size="11.00">(format tanggal, no. HP, kolom wajib)</text>
+</g>
+<!-- cand&#45;&gt;ingest -->
+<g id="edge1" class="edge">
+<title>cand-&gt;ingest</title>
+<path fill="none" stroke="#444444" d="M445,-882.15C445,-875.79 445,-868.4 445,-861.29"/>
+<polygon fill="#444444" stroke="#444444" points="448.5,-861.34 445,-851.34 441.5,-861.34 448.5,-861.34"/>
+</g>
+<!-- job -->
+<g id="node2" class="node">
+<title>job</title>
+<path fill="#eaf0fa" stroke="#1f3864" stroke-width="1.2" d="M297.71,-918.4C297.71,-918.4 166.29,-918.4 166.29,-918.4 160.29,-918.4 154.29,-912.4 154.29,-906.4 154.29,-906.4 154.29,-894.4 154.29,-894.4 154.29,-888.4 160.29,-882.4 166.29,-882.4 166.29,-882.4 297.71,-882.4 297.71,-882.4 303.71,-882.4 309.71,-888.4 309.71,-894.4 309.71,-894.4 309.71,-906.4 309.71,-906.4 309.71,-912.4 303.71,-918.4 297.71,-918.4"/>
+<text xml:space="preserve" text-anchor="middle" x="232" y="-903.7" font-family="Helvetica,sans-Serif" font-size="11.00">Data Lowongan</text>
+<text xml:space="preserve" text-anchor="middle" x="232" y="-890.5" font-family="Helvetica,sans-Serif" font-size="11.00">(kumiai/perusahaan Jepang)</text>
+</g>
+<!-- job&#45;&gt;ingest -->
+<g id="edge2" class="edge">
+<title>job-&gt;ingest</title>
+<path fill="none" stroke="#444444" d="M287.69,-881.88C315.45,-873.15 349.23,-862.53 378.36,-853.36"/>
+<polygon fill="#444444" stroke="#444444" points="379.34,-856.72 387.83,-850.38 377.24,-850.05 379.34,-856.72"/>
+</g>
+<!-- sched -->
+<g id="node3" class="node">
+<title>sched</title>
+<path fill="#fff2cc" stroke="#bf9000" stroke-width="1.2" d="M727.53,-918.4C727.53,-918.4 592.47,-918.4 592.47,-918.4 586.47,-918.4 580.47,-912.4 580.47,-906.4 580.47,-906.4 580.47,-894.4 580.47,-894.4 580.47,-888.4 586.47,-882.4 592.47,-882.4 592.47,-882.4 727.53,-882.4 727.53,-882.4 733.53,-882.4 739.53,-888.4 739.53,-894.4 739.53,-894.4 739.53,-906.4 739.53,-906.4 739.53,-912.4 733.53,-918.4 727.53,-918.4"/>
+<text xml:space="preserve" text-anchor="middle" x="660" y="-903.7" font-family="Helvetica,sans-Serif" font-size="11.00">Scheduler harian 08:00 WIB</text>
+<text xml:space="preserve" text-anchor="middle" x="660" y="-890.5" font-family="Helvetica,sans-Serif" font-size="11.00">(cron / n8n Schedule Trigger)</text>
+</g>
+<!-- sched&#45;&gt;ingest -->
+<g id="edge3" class="edge">
+<title>sched-&gt;ingest</title>
+<path fill="none" stroke="#444444" d="M603.79,-881.88C575.65,-873.11 541.37,-862.43 511.88,-853.24"/>
+<polygon fill="#444444" stroke="#444444" points="513.29,-850.01 502.7,-850.38 511.2,-856.7 513.29,-850.01"/>
+</g>
+<!-- ko -->
+<g id="node5" class="node">
+<title>ko</title>
+<polygon fill="#fce4d6" stroke="#c55a11" stroke-width="1.2" points="733,-522.6 573.94,-475 733,-427.4 892.06,-475 733,-522.6"/>
+<text xml:space="preserve" text-anchor="middle" x="733" y="-484.9" font-family="Helvetica,sans-Serif" font-size="11.00">Knock-out syarat mutlak</text>
+<text xml:space="preserve" text-anchor="middle" x="733" y="-471.7" font-family="Helvetica,sans-Serif" font-size="11.00">usia - gender - sertifikat wajib</text>
+<text xml:space="preserve" text-anchor="middle" x="733" y="-458.5" font-family="Helvetica,sans-Serif" font-size="11.00">JLPT minimum - kesehatan</text>
+</g>
+<!-- ingest&#45;&gt;ko -->
+<g id="edge6" class="edge">
+<title>ingest-&gt;ko</title>
+<path fill="none" stroke="#444444" d="M459.28,-812.83C502.12,-760.11 630.56,-602.06 695.1,-522.63"/>
+<polygon fill="#444444" stroke="#444444" points="697.73,-524.95 701.32,-514.99 692.3,-520.54 697.73,-524.95"/>
+</g>
+<!-- chk -->
+<g id="node10" class="node">
+<title>chk</title>
+<path fill="#eaf0fa" stroke="#1f3864" stroke-width="1.2" d="M361.49,-755.6C361.49,-755.6 188.51,-755.6 188.51,-755.6 182.51,-755.6 176.51,-749.6 176.51,-743.6 176.51,-743.6 176.51,-731.6 176.51,-731.6 176.51,-725.6 182.51,-719.6 188.51,-719.6 188.51,-719.6 361.49,-719.6 361.49,-719.6 367.49,-719.6 373.49,-725.6 373.49,-731.6 373.49,-731.6 373.49,-743.6 373.49,-743.6 373.49,-749.6 367.49,-755.6 361.49,-755.6"/>
+<text xml:space="preserve" text-anchor="middle" x="275" y="-740.9" font-family="Helvetica,sans-Serif" font-size="11.00">Hitung selisih hari (tenggat - hari ini)</text>
+<text xml:space="preserve" text-anchor="middle" x="275" y="-727.7" font-family="Helvetica,sans-Serif" font-size="11.00">untuk wawancara, medical, dokumen</text>
+</g>
+<!-- ingest&#45;&gt;chk -->
+<g id="edge12" class="edge">
+<title>ingest-&gt;chk</title>
+<path fill="none" stroke="#444444" d="M412.62,-812.92C385.65,-798.35 347.02,-777.49 317.55,-761.58"/>
+<polygon fill="#444444" stroke="#444444" points="319.34,-758.56 308.88,-756.89 316.01,-764.72 319.34,-758.56"/>
+</g>
+<!-- sc -->
+<g id="node6" class="node">
+<title>sc</title>
+<path fill="#eaf0fa" stroke="#1f3864" stroke-width="1.2" d="M811.21,-364.4C811.21,-364.4 646.79,-364.4 646.79,-364.4 640.79,-364.4 634.79,-358.4 634.79,-352.4 634.79,-352.4 634.79,-328.8 634.79,-328.8 634.79,-322.8 640.79,-316.8 646.79,-316.8 646.79,-316.8 811.21,-316.8 811.21,-316.8 817.21,-316.8 823.21,-322.8 823.21,-328.8 823.21,-328.8 823.21,-352.4 823.21,-352.4 823.21,-358.4 817.21,-364.4 811.21,-364.4"/>
+<text xml:space="preserve" text-anchor="middle" x="729" y="-350.5" font-family="Helvetica,sans-Serif" font-size="11.00">Skor berbobot 0-100</text>
+<text xml:space="preserve" text-anchor="middle" x="729" y="-337.3" font-family="Helvetica,sans-Serif" font-size="11.00">Sertifikasi 30 - Bahasa 30 - Usia 15</text>
+<text xml:space="preserve" text-anchor="middle" x="729" y="-324.1" font-family="Helvetica,sans-Serif" font-size="11.00">Kesehatan 15 - Pengalaman 10</text>
+</g>
+<!-- ko&#45;&gt;sc -->
+<g id="edge4" class="edge">
+<title>ko-&gt;sc</title>
+<path fill="none" stroke="#444444" d="M731.59,-427.32C731.08,-410.47 730.52,-391.77 730.04,-376.14"/>
+<polygon fill="#444444" stroke="#444444" points="733.55,-376.28 729.75,-366.39 726.55,-376.49 733.55,-376.28"/>
+<text xml:space="preserve" text-anchor="middle" x="741.28" y="-402.4" font-family="Helvetica,sans-Serif" font-size="10.00">lolos</text>
+</g>
+<!-- rej -->
+<g id="node8" class="node">
+<title>rej</title>
+<path fill="#f2f2f2" stroke="#7f7f7f" stroke-width="1.2" d="M545.73,-283.8C545.73,-283.8 396.27,-283.8 396.27,-283.8 390.27,-283.8 384.27,-277.8 384.27,-271.8 384.27,-271.8 384.27,-259.8 384.27,-259.8 384.27,-253.8 390.27,-247.8 396.27,-247.8 396.27,-247.8 545.73,-247.8 545.73,-247.8 551.73,-247.8 557.73,-253.8 557.73,-259.8 557.73,-259.8 557.73,-271.8 557.73,-271.8 557.73,-277.8 551.73,-283.8 545.73,-283.8"/>
+<text xml:space="preserve" text-anchor="middle" x="471" y="-269.1" font-family="Helvetica,sans-Serif" font-size="11.00">Tandai 'Tidak memenuhi syarat'</text>
+<text xml:space="preserve" text-anchor="middle" x="471" y="-255.9" font-family="Helvetica,sans-Serif" font-size="11.00">+ alasan (untuk saran pelatihan)</text>
+</g>
+<!-- ko&#45;&gt;rej -->
+<g id="edge7" class="edge">
+<title>ko-&gt;rej</title>
+<path fill="none" stroke="#444444" d="M676.53,-443.9C651.13,-429.35 621.32,-410.84 596.42,-391.4 557.3,-360.85 517.56,-319.17 493.59,-292.62"/>
+<polygon fill="#444444" stroke="#444444" points="496.37,-290.48 487.1,-285.36 491.15,-295.15 496.37,-290.48"/>
+<text xml:space="preserve" text-anchor="middle" x="609.21" y="-337.6" font-family="Helvetica,sans-Serif" font-size="10.00">gugur</text>
+</g>
+<!-- rk -->
+<g id="node7" class="node">
+<title>rk</title>
+<path fill="#eaf0fa" stroke="#1f3864" stroke-width="1.2" d="M832.65,-283.8C832.65,-283.8 607.35,-283.8 607.35,-283.8 601.35,-283.8 595.35,-277.8 595.35,-271.8 595.35,-271.8 595.35,-259.8 595.35,-259.8 595.35,-253.8 601.35,-247.8 607.35,-247.8 607.35,-247.8 832.65,-247.8 832.65,-247.8 838.65,-247.8 844.65,-253.8 844.65,-259.8 844.65,-259.8 844.65,-271.8 844.65,-271.8 844.65,-277.8 838.65,-283.8 832.65,-283.8"/>
+<text xml:space="preserve" text-anchor="middle" x="720" y="-269.1" font-family="Helvetica,sans-Serif" font-size="11.00">Ranking per kandidat</text>
+<text xml:space="preserve" text-anchor="middle" x="720" y="-255.9" font-family="Helvetica,sans-Serif" font-size="11.00">Sangat Cocok &gt;=75 - Cocok &gt;=60 - Kurang &lt;60</text>
+</g>
+<!-- sc&#45;&gt;rk -->
+<g id="edge5" class="edge">
+<title>sc-&gt;rk</title>
+<path fill="none" stroke="#444444" d="M726.15,-316.57C725.32,-309.84 724.4,-302.41 723.53,-295.38"/>
+<polygon fill="#444444" stroke="#444444" points="727.03,-295.14 722.33,-285.65 720.08,-296 727.03,-295.14"/>
+</g>
+<!-- db -->
+<g id="node9" class="node">
+<title>db</title>
+<path fill="#e2efda" stroke="#548235" stroke-width="1.2" d="M530.58,-214.8C530.58,-214.8 411.42,-214.8 411.42,-214.8 405.42,-214.8 399.42,-208.8 399.42,-202.8 399.42,-202.8 399.42,-190.8 399.42,-190.8 399.42,-184.8 405.42,-178.8 411.42,-178.8 411.42,-178.8 530.58,-178.8 530.58,-178.8 536.58,-178.8 542.58,-184.8 542.58,-190.8 542.58,-190.8 542.58,-202.8 542.58,-202.8 542.58,-208.8 536.58,-214.8 530.58,-214.8"/>
+<text xml:space="preserve" text-anchor="middle" x="471" y="-200.1" font-family="Helvetica,sans-Serif" font-size="11.00">Simpan hasil</text>
+<text xml:space="preserve" text-anchor="middle" x="471" y="-186.9" font-family="Helvetica,sans-Serif" font-size="11.00">matching_results.csv / DB</text>
+</g>
+<!-- rk&#45;&gt;db -->
+<g id="edge8" class="edge">
+<title>rk-&gt;db</title>
+<path fill="none" stroke="#444444" d="M654.9,-247.28C621.88,-238.4 581.57,-227.55 547.11,-218.28"/>
+<polygon fill="#444444" stroke="#444444" points="548.18,-214.94 537.61,-215.72 546.36,-221.7 548.18,-214.94"/>
+</g>
+<!-- rej&#45;&gt;db -->
+<g id="edge9" class="edge">
+<title>rej-&gt;db</title>
+<path fill="none" stroke="#444444" d="M471,-247.55C471,-241.19 471,-233.8 471,-226.69"/>
+<polygon fill="#444444" stroke="#444444" points="474.5,-226.74 471,-216.74 467.5,-226.74 474.5,-226.74"/>
+</g>
+<!-- rep -->
+<g id="node18" class="node">
+<title>rep</title>
+<path fill="#eaf0fa" stroke="#1f3864" stroke-width="1.2" d="M533.47,-121C533.47,-121 278.53,-121 278.53,-121 272.53,-121 266.53,-115 266.53,-109 266.53,-109 266.53,-97 266.53,-97 266.53,-91 272.53,-85 278.53,-85 278.53,-85 533.47,-85 533.47,-85 539.47,-85 545.47,-91 545.47,-97 545.47,-97 545.47,-109 545.47,-109 545.47,-115 539.47,-121 533.47,-121"/>
+<text xml:space="preserve" text-anchor="middle" x="406" y="-106.3" font-family="Helvetica,sans-Serif" font-size="11.00">Agregasi: kandidat per tahap, rekomendasi lowongan,</text>
+<text xml:space="preserve" text-anchor="middle" x="406" y="-93.1" font-family="Helvetica,sans-Serif" font-size="11.00">reminder terkirim, agenda 7 hari, flag perlu perhatian</text>
+</g>
+<!-- db&#45;&gt;rep -->
+<g id="edge21" class="edge">
+<title>db-&gt;rep</title>
+<path fill="none" stroke="#444444" d="M458.77,-178.53C449.21,-165.03 435.75,-146.02 424.82,-130.57"/>
+<polygon fill="#444444" stroke="#444444" points="427.9,-128.88 419.27,-122.74 422.19,-132.92 427.9,-128.88"/>
+</g>
+<!-- rule -->
+<g id="node11" class="node">
+<title>rule</title>
+<polygon fill="#fce4d6" stroke="#c55a11" stroke-width="1.2" points="221,-686.6 16.12,-639 221,-591.4 425.88,-639 221,-686.6"/>
+<text xml:space="preserve" text-anchor="middle" x="221" y="-648.9" font-family="Helvetica,sans-Serif" font-size="11.00">Cocok aturan H-n?</text>
+<text xml:space="preserve" text-anchor="middle" x="221" y="-635.7" font-family="Helvetica,sans-Serif" font-size="11.00">Wawancara H-3,H-1 - Medical H-3,H-1</text>
+<text xml:space="preserve" text-anchor="middle" x="221" y="-622.5" font-family="Helvetica,sans-Serif" font-size="11.00">Dokumen H-7,H-3,H-1</text>
+</g>
+<!-- chk&#45;&gt;rule -->
+<g id="edge10" class="edge">
+<title>chk-&gt;rule</title>
+<path fill="none" stroke="#444444" d="M265.35,-719.33C260.93,-711.43 255.45,-701.62 249.85,-691.61"/>
+<polygon fill="#444444" stroke="#444444" points="252.93,-689.95 245,-682.93 246.82,-693.37 252.93,-689.95"/>
+</g>
+<!-- dup -->
+<g id="node12" class="node">
+<title>dup</title>
+<polygon fill="#fce4d6" stroke="#c55a11" stroke-width="1.2" points="221,-509.4 94.94,-475 221,-440.6 347.06,-475 221,-509.4"/>
+<text xml:space="preserve" text-anchor="middle" x="221" y="-478.3" font-family="Helvetica,sans-Serif" font-size="11.00">Sudah pernah dikirim?</text>
+<text xml:space="preserve" text-anchor="middle" x="221" y="-465.1" font-family="Helvetica,sans-Serif" font-size="11.00">(cek sent_log)</text>
+</g>
+<!-- rule&#45;&gt;dup -->
+<g id="edge11" class="edge">
+<title>rule-&gt;dup</title>
+<path fill="none" stroke="#444444" d="M221,-591.14C221,-569.12 221,-542.98 221,-521.18"/>
+<polygon fill="#444444" stroke="#444444" points="224.5,-521.4 221,-511.4 217.5,-521.4 224.5,-521.4"/>
+<text xml:space="preserve" text-anchor="middle" x="226.28" y="-566.4" font-family="Helvetica,sans-Serif" font-size="10.00">ya</text>
+</g>
+<!-- skip -->
+<g id="node13" class="node">
+<title>skip</title>
+<path fill="#f2f2f2" stroke="#7f7f7f" stroke-width="1.2" d="M62,-358.6C62,-358.6 32,-358.6 32,-358.6 26,-358.6 20,-352.6 20,-346.6 20,-346.6 20,-334.6 20,-334.6 20,-328.6 26,-322.6 32,-322.6 32,-322.6 62,-322.6 62,-322.6 68,-322.6 74,-328.6 74,-334.6 74,-334.6 74,-346.6 74,-346.6 74,-352.6 68,-358.6 62,-358.6"/>
+<text xml:space="preserve" text-anchor="middle" x="47" y="-337.3" font-family="Helvetica,sans-Serif" font-size="11.00">Lewati</text>
+</g>
+<!-- rule&#45;&gt;skip -->
+<g id="edge13" class="edge">
+<title>rule-&gt;skip</title>
+<path fill="none" stroke="#444444" d="M132.08,-611.56C104.79,-598.98 77.58,-580.92 60.88,-555.4 23.72,-498.65 32.46,-414.27 40.56,-370.41"/>
+<polygon fill="#444444" stroke="#444444" points="43.98,-371.15 42.5,-360.66 37.12,-369.79 43.98,-371.15"/>
+<text xml:space="preserve" text-anchor="middle" x="71.44" y="-472" font-family="Helvetica,sans-Serif" font-size="10.00">tidak</text>
+</g>
+<!-- dup&#45;&gt;skip -->
+<g id="edge14" class="edge">
+<title>dup-&gt;skip</title>
+<path fill="none" stroke="#444444" d="M172.33,-453.32C142.65,-439.01 105.3,-417.82 78,-391.4 71.28,-384.9 65.4,-376.66 60.61,-368.76"/>
+<polygon fill="#444444" stroke="#444444" points="63.67,-367.07 55.72,-360.07 57.57,-370.5 63.67,-367.07"/>
+<text xml:space="preserve" text-anchor="middle" x="112.01" y="-402.4" font-family="Helvetica,sans-Serif" font-size="10.00">sudah</text>
+</g>
+<!-- tpl -->
+<g id="node14" class="node">
+<title>tpl</title>
+<path fill="#eaf0fa" stroke="#1f3864" stroke-width="1.2" d="M334.87,-358.6C334.87,-358.6 111.13,-358.6 111.13,-358.6 105.13,-358.6 99.13,-352.6 99.13,-346.6 99.13,-346.6 99.13,-334.6 99.13,-334.6 99.13,-328.6 105.13,-322.6 111.13,-322.6 111.13,-322.6 334.87,-322.6 334.87,-322.6 340.87,-322.6 346.87,-328.6 346.87,-334.6 346.87,-334.6 346.87,-346.6 346.87,-346.6 346.87,-352.6 340.87,-358.6 334.87,-358.6"/>
+<text xml:space="preserve" text-anchor="middle" x="223" y="-343.9" font-family="Helvetica,sans-Serif" font-size="11.00">Render template pesan</text>
+<text xml:space="preserve" text-anchor="middle" x="223" y="-330.7" font-family="Helvetica,sans-Serif" font-size="11.00">(per tahap, personal: nama, tanggal, lokasi/link)</text>
+</g>
+<!-- dup&#45;&gt;tpl -->
+<g id="edge19" class="edge">
+<title>dup-&gt;tpl</title>
+<path fill="none" stroke="#444444" d="M221.51,-440.25C221.84,-418.7 222.25,-391.06 222.56,-370.52"/>
+<polygon fill="#444444" stroke="#444444" points="226.06,-370.63 222.71,-360.58 219.06,-370.52 226.06,-370.63"/>
+<text xml:space="preserve" text-anchor="middle" x="235.74" y="-402.4" font-family="Helvetica,sans-Serif" font-size="10.00">belum</text>
+</g>
+<!-- wa -->
+<g id="node15" class="node">
+<title>wa</title>
+<path fill="#eaf0fa" stroke="#1f3864" stroke-width="1.2" d="M230.47,-283.8C230.47,-283.8 101.53,-283.8 101.53,-283.8 95.53,-283.8 89.53,-277.8 89.53,-271.8 89.53,-271.8 89.53,-259.8 89.53,-259.8 89.53,-253.8 95.53,-247.8 101.53,-247.8 101.53,-247.8 230.47,-247.8 230.47,-247.8 236.47,-247.8 242.47,-253.8 242.47,-259.8 242.47,-259.8 242.47,-271.8 242.47,-271.8 242.47,-277.8 236.47,-283.8 230.47,-283.8"/>
+<text xml:space="preserve" text-anchor="middle" x="166" y="-269.1" font-family="Helvetica,sans-Serif" font-size="11.00">WhatsApp</text>
+<text xml:space="preserve" text-anchor="middle" x="166" y="-255.9" font-family="Helvetica,sans-Serif" font-size="11.00">(Fonnte / WA Business API)</text>
+</g>
+<!-- tpl&#45;&gt;wa -->
+<g id="edge15" class="edge">
+<title>tpl-&gt;wa</title>
+<path fill="none" stroke="#444444" d="M209.49,-322.35C202.66,-313.62 194.21,-302.83 186.59,-293.09"/>
+<polygon fill="#444444" stroke="#444444" points="189.46,-291.09 180.54,-285.37 183.95,-295.4 189.46,-291.09"/>
+</g>
+<!-- em -->
+<g id="node16" class="node">
+<title>em</title>
+<path fill="#eaf0fa" stroke="#1f3864" stroke-width="1.2" d="M346.89,-283.8C346.89,-283.8 279.11,-283.8 279.11,-283.8 273.11,-283.8 267.11,-277.8 267.11,-271.8 267.11,-271.8 267.11,-259.8 267.11,-259.8 267.11,-253.8 273.11,-247.8 279.11,-247.8 279.11,-247.8 346.89,-247.8 346.89,-247.8 352.89,-247.8 358.89,-253.8 358.89,-259.8 358.89,-259.8 358.89,-271.8 358.89,-271.8 358.89,-277.8 352.89,-283.8 346.89,-283.8"/>
+<text xml:space="preserve" text-anchor="middle" x="313" y="-269.1" font-family="Helvetica,sans-Serif" font-size="11.00">Email</text>
+<text xml:space="preserve" text-anchor="middle" x="313" y="-255.9" font-family="Helvetica,sans-Serif" font-size="11.00">(SMTP / Gmail)</text>
+</g>
+<!-- tpl&#45;&gt;em -->
+<g id="edge16" class="edge">
+<title>tpl-&gt;em</title>
+<path fill="none" stroke="#444444" d="M244.33,-322.35C255.79,-313.08 270.11,-301.49 282.71,-291.3"/>
+<polygon fill="#444444" stroke="#444444" points="284.76,-294.14 290.34,-285.13 280.36,-288.7 284.76,-294.14"/>
+</g>
+<!-- log -->
+<g id="node17" class="node">
+<title>log</title>
+<path fill="#e2efda" stroke="#548235" stroke-width="1.2" d="M346.8,-214.8C346.8,-214.8 269.2,-214.8 269.2,-214.8 263.2,-214.8 257.2,-208.8 257.2,-202.8 257.2,-202.8 257.2,-190.8 257.2,-190.8 257.2,-184.8 263.2,-178.8 269.2,-178.8 269.2,-178.8 346.8,-178.8 346.8,-178.8 352.8,-178.8 358.8,-184.8 358.8,-190.8 358.8,-190.8 358.8,-202.8 358.8,-202.8 358.8,-208.8 352.8,-214.8 346.8,-214.8"/>
+<text xml:space="preserve" text-anchor="middle" x="308" y="-200.1" font-family="Helvetica,sans-Serif" font-size="11.00">Catat ke sent_log</text>
+<text xml:space="preserve" text-anchor="middle" x="308" y="-186.9" font-family="Helvetica,sans-Serif" font-size="11.00">(anti-kirim ganda)</text>
+</g>
+<!-- wa&#45;&gt;log -->
+<g id="edge17" class="edge">
+<title>wa-&gt;log</title>
+<path fill="none" stroke="#444444" d="M202.94,-247.37C220.47,-239.1 241.63,-229.12 260.35,-220.28"/>
+<polygon fill="#444444" stroke="#444444" points="261.83,-223.45 269.38,-216.02 258.85,-217.12 261.83,-223.45"/>
+</g>
+<!-- em&#45;&gt;log -->
+<g id="edge18" class="edge">
+<title>em-&gt;log</title>
+<path fill="none" stroke="#444444" d="M311.71,-247.55C311.24,-241.19 310.69,-233.8 310.16,-226.69"/>
+<polygon fill="#444444" stroke="#444444" points="313.65,-226.45 309.41,-216.74 306.67,-226.97 313.65,-226.45"/>
+</g>
+<!-- log&#45;&gt;rep -->
+<g id="edge22" class="edge">
+<title>log-&gt;rep</title>
+<path fill="none" stroke="#444444" d="M326.43,-178.53C341.26,-164.65 362.3,-144.94 379.02,-129.27"/>
+<polygon fill="#444444" stroke="#444444" points="381.31,-131.93 386.21,-122.54 376.52,-126.82 381.31,-131.93"/>
+</g>
+<!-- out -->
+<g id="node19" class="node">
+<title>out</title>
+<path fill="#e2efda" stroke="#548235" stroke-width="1.2" d="M486.97,-52C486.97,-52 325.03,-52 325.03,-52 319.03,-52 313.03,-46 313.03,-40 313.03,-40 313.03,-28 313.03,-28 313.03,-22 319.03,-16 325.03,-16 325.03,-16 486.97,-16 486.97,-16 492.97,-16 498.97,-22 498.97,-28 498.97,-28 498.97,-40 498.97,-40 498.97,-46 492.97,-52 486.97,-52"/>
+<text xml:space="preserve" text-anchor="middle" x="406" y="-37.3" font-family="Helvetica,sans-Serif" font-size="11.00">Kirim laporan harian/mingguan</text>
+<text xml:space="preserve" text-anchor="middle" x="406" y="-24.1" font-family="Helvetica,sans-Serif" font-size="11.00">(email/Slack/WA grup manajemen)</text>
+</g>
+<!-- rep&#45;&gt;out -->
+<g id="edge20" class="edge">
+<title>rep-&gt;out</title>
+<path fill="none" stroke="#444444" d="M406,-84.75C406,-78.39 406,-71 406,-63.89"/>
+<polygon fill="#444444" stroke="#444444" points="409.5,-63.94 406,-53.94 402.5,-63.94 409.5,-63.94"/>
+</g>
+</g>
+</svg>

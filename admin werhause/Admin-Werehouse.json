@@ -1,0 +1,710 @@
+{
+  "name": "Admin-Werehouse",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e5589213-fa87-4c28-a895-76a5214b0c53",
+      "name": "Telegram Trigger",
+      "webhookId": "c831b596-4fdf-48a0-9b3a-745b1937bcce",
+      "credentials": {
+        "telegramApi": {
+          "id": "SnOQYR1GAJqKIoVC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "0130ae6f-6cf3-497f-86ec-569994545500",
+              "leftValue": "={{ $json.message.text }}",
+              "rightValue": "laporan",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        224,
+        0
+      ],
+      "id": "d956a593-8502-4e12-ae9c-63e8bcb650a1",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.6-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        368,
+        352
+      ],
+      "id": "c5c8229d-542f-4b1e-8387-e679398ea78f",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YPJefMX1wpbTwkJW",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Extract the following information from the user's message and return it in JSON format.\n",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=Extract the following information from the user's message and return it in JSON format. Keys to extract: - date (format: YYYY-MM-DD) - type (values: \"incoming\" or \"outgoing\") - name (name of the item/material) - quantity (numeric value) - unit (unit of measurement, e.g., KG, liter, buah, etc.) - person (name of the person who received or approved)  If any information is missing or unclear, set the value to \"N/A\".  Examples:  User Message: barang masuk engine produksi dengan jumlah 2 buah diterima oleh Pak Maman pada 17 Agustus 2025 JSON Output: {   \"date\": \"2025-08-17\",   \"type\": \"incoming\",   \"name\": \"engine produksi\",   \"quantity\": 2,   \"unit\": \"buah\",   \"person\": \"Pak Maman\" }  User Message: barang keluar bahan bakar bensin dengan jumlah 5 liter disetujui oleh Bu Dewi pada 20 Mei 2025 JSON Output: {   \"date\": \"2025-05-20\",   \"type\": \"outgoing\",   \"name\": \"bahan bakar bensin\",   \"quantity\": 5,   \"unit\": \"liter\",   \"person\": \"Bu Dewi\" }  User Message: {{ $json.message.text }} JSON Output: "
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        400,
+        128
+      ],
+      "id": "21eb6069-602e-4a4e-887d-2db919f8afe9",
+      "name": "LLM Append data"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"date\": \"2025-05-20\",\n  \"type\": \"outgoing\",\n  \"name\": \"bahan bakar bensin\",\n  \"quantity\": 5,\n  \"unit\": \"liter\",\n  \"person\": \"Bu Dewi\"\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        576,
+        352
+      ],
+      "id": "e79612d6-64f8-4b8f-96f9-06ba5e8a2ce9",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "jsCode": "const extractedData = $input.first().json.output;\n\nconst requiredFields = ['date', 'type', 'name', 'quantity', 'unit', 'person'];\n\nlet isValid = true;\nlet missingFields = [];\n\nfor (const field of requiredFields) {\n    if (!extractedData[field] || extractedData[field] === 'N/A' || extractedData[field] === null || String(extractedData[field]).trim() === '') {\n        isValid = false;\n        missingFields.push(field);\n    }\n\n    if (field === 'quantity' && isValid) { \n        const quantity = Number(extractedData.quantity);\n        if (isNaN(quantity) || quantity <= 0) {\n            isValid = false;\n            missingFields.push('quantity_numeric_positive');\n        }\n    }\n}\n\nif (isValid) {\n    return [{ json: { isValid: true, data: extractedData } }];\n} else {\n    return [{ json: { isValid: false, missingFields: missingFields, originalMessage: $('Telegram Trigger').first().json.message.text } }];\n}\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        816,
+        96
+      ],
+      "id": "5f1ec836-47c4-4dc3-be7f-aa11a7c6aaf0",
+      "name": "Validate Date"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "6f669494-6d47-4b04-8fbf-b0b0ecc0b2be",
+              "leftValue": "={{ $json.isValid }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1040,
+        96
+      ],
+      "id": "abd320cf-0e01-423c-adbd-28ddf5f7c96c",
+      "name": "is valid ?"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1AHoyfHb1Woys2xoUE0bpsqZ1SDQHw7hBkZPFRaThX1s",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AHoyfHb1Woys2xoUE0bpsqZ1SDQHw7hBkZPFRaThX1s/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "date": "={{ $json.data.date }}",
+            "type": "={{ $json.data.type }}",
+            "name": "={{ $json.data.name }}",
+            "quantity": "={{ $json.data.quantity }}",
+            "unit": "={{ $json.data.unit }}",
+            "person": "={{ $json.data.person }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "date",
+              "displayName": "date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "type",
+              "displayName": "type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "quantity",
+              "displayName": "quantity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "unit",
+              "displayName": "unit",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "person",
+              "displayName": "person",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1264,
+        32
+      ],
+      "id": "d074542e-5c7c-406c-9408-6280875f59d3",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hvYF5gTvAgng62Y4",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "8421370372",
+        "text": "=Pencatatan berhasil dilakukan dengan data sebagai berikut :\n\n*Tanggal transaksi* : {{ $json.date }}\n*Tipe transaksi* : {{ $json.type }}\n*Nama item* : {{ $json.name }}\n*Quanity* : {{ $json.quantity }}{{ $json.unit }}\n*Pihak yang bersangkutan* : {{ $json.person }}\n\nTerimakasih dan semangat bekerja!\n- Rul Corp\n",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1472,
+        32
+      ],
+      "id": "029ec97d-6c46-44f0-9ffa-541dd127f2a7",
+      "name": "Send a text message",
+      "webhookId": "b944a3e1-dd67-497d-9ef1-3ed4ecfca287",
+      "credentials": {
+        "telegramApi": {
+          "id": "SnOQYR1GAJqKIoVC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "8421370372",
+        "text": "=Maaf. penambahan data gagal dilakukan karena format pesan tidak sesuai, harap gunakan format pesan yang sesuai seperti di bawah ini :\n{tipe transaksi (barang masuk/barang keluar)} {nama barang} dengan jumlah {jumlah barang} {satuan} pada {tanggal bulan tahun transaksi} {person (diterima/disetujui oleh)}\n",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1264,
+        240
+      ],
+      "id": "34e0b1b1-2b45-463d-87d7-7c93a4f3b544",
+      "name": "Invalid Format Massage",
+      "webhookId": "b944a3e1-dd67-497d-9ef1-3ed4ecfca287",
+      "credentials": {
+        "telegramApi": {
+          "id": "SnOQYR1GAJqKIoVC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-3.6-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        464,
+        -48
+      ],
+      "id": "7d9cff98-0676-47f4-9024-8a883c230e62",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "YPJefMX1wpbTwkJW",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"report_type\": \"all\",\n  \"report_period\": \"this_month\"\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        608,
+        -48
+      ],
+      "id": "aed2308e-da83-4bb3-b99a-7888f1e18212",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Extract the following information from the user's message and return it in JSON format.",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=Extract the following report parameters from the user's message and return them in JSON format.\nKeys to extract:\n- report_type (values: \"incoming\", \"outgoing\", \"all\". Default to \"all\" if not specified)\n- report_period (values: \"this_month\", \"last_month\", \"today\", \"yesterday\", \"this_year\", \"last_year\". If a specific date like \"20 Mei 2025\" or \"May 2025\" is mentioned, convert it to a suitable machine-readable period or date range. Default to \"this_month\" if not specified)\n\nExample:\n\nUser Message: berikan saya laporan barang masuk dan keluar pada bulan ini\nJSON Output:\n{\n  \"report_type\": \"all\",\n  \"report_period\": \"this_month\"\n}\n\nUser Message: berikan laporan barang keluar bulan lalu\nJSON Output:\n{\n  \"report_type\": \"outgoing\",\n  \"report_period\": \"last_month\"\n}\n\nUser Message: berikan saya laporan barang masuk untuk tahun ini\nJSON Output:\n{\n  \"report_type\": \"incoming\",\n  \"report_period\": \"this_year\"\n}\n\nUser Message: {{ $json.message.text }}\nJSON Output:\n"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        464,
+        -272
+      ],
+      "id": "9d15b129-14ae-418a-b460-a9f09f854076",
+      "name": "LLM Report"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1AHoyfHb1Woys2xoUE0bpsqZ1SDQHw7hBkZPFRaThX1s",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AHoyfHb1Woys2xoUE0bpsqZ1SDQHw7hBkZPFRaThX1s/edit#gid=0"
+        },
+        "combineFilters": "OR",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1056,
+        -272
+      ],
+      "id": "4de71c36-83ea-4675-9626-c859a070c1db",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "hvYF5gTvAgng62Y4",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const reportType = $('LLM Report').first().json.output.report_type;\nconst reportPeriod = $('LLM Report').first().json.output.report_period;\n\nlet startDate = null;\nlet endDate = null;\n\nconst today = DateTime.now();\n\nfunction parseSpecificPeriod(periodString) {\n    const yearMonthMatch = periodString.match(/^(\\d{4})-(\\d{2})$/);\n    if (yearMonthMatch) {\n        const year = parseInt(yearMonthMatch[1]);\n        const month = parseInt(yearMonthMatch[2]); \n        if (!isNaN(year) && !isNaN(month) && month >= 1 && month <= 12) {\n            const date = DateTime.fromObject({ year, month });\n            return { start: date.startOf('month'), end: date.endOf('month') };\n        }\n    }\n\n    const months = {\n        'januari': 0, 'februari': 1, 'maret': 2, 'april': 3, 'mei': 4, 'juni': 5,\n        'juli': 6, 'agustus': 7, 'september': 8, 'oktober': 9, 'november': 10, 'desember': 11,\n        'january': 0, 'february': 1, 'march': 2, 'april': 3, 'may': 4, 'june': 5,\n        'july': 6, 'august': 7, 'september': 8, 'october': 9, 'november': 10, 'december': 11\n    };\n\n    const monthNamesRegex = Object.keys(months).join('|');\n\n    const monthYearMatch = periodString.match(new RegExp(`(${monthNamesRegex})\\\\s+(\\\\d{4})`, 'i'));\n    const dayMonthYearMatch = periodString.match(new RegExp(`(\\\\d{1,2})\\\\s+(${monthNamesRegex})\\\\s+(\\\\d{4})`, 'i'));\n\n    if (dayMonthYearMatch) {\n        const day = parseInt(dayMonthYearMatch[1]);\n        const month = months[dayMonthYearMatch[2].toLowerCase()];\n        const year = parseInt(dayMonthYearMatch[3]);\n        if (!isNaN(day) && month !== undefined && !isNaN(year)) {\n            const date = DateTime.fromObject({ year, month: month + 1, day });\n            return { start: date.startOfDay(), end: date.endOfDay() };\n        }\n    } else if (monthYearMatch) {\n        const month = months[monthYearMatch[1].toLowerCase()];\n        const year = parseInt(monthYearMatch[2]);\n        if (month !== undefined && !isNaN(year)) {\n            const date = DateTime.fromObject({ year, month: month + 1 });\n            return { start: date.startOf('month'), end: date.endOf('month') };\n        }\n    } else if (periodString.toLowerCase() === 'today') {\n        return { start: today.startOfDay(), end: today.endOfDay() };\n    } else if (periodString.toLowerCase() === 'yesterday') {\n        const yesterday = today.minus({ days: 1 });\n        return { start: yesterday.startOfDay(), end: yesterday.endOfDay() };\n    }\n\n    return null;\n}\n\nconst specificPeriod = parseSpecificPeriod(reportPeriod);\n\nif (specificPeriod) {\n    startDate = specificPeriod.start;\n    endDate = specificPeriod.end;\n} else {\n    switch (reportPeriod) {\n        case 'this_month':\n            startDate = today.startOf('month');\n            endDate = today.endOf('month');\n            break;\n        case 'last_month':\n            startDate = today.minus({ months: 1 }).startOf('month');\n            endDate = today.minus({ months: 1 }).endOf('month');\n            break;\n        case 'this_year':\n            startDate = today.startOf('year');\n            endDate = today.endOf('year');\n            break;\n        case 'last_year':\n            startDate = today.minus({ years: 1 }).startOf('year');\n            endDate = today.minus({ years: 1 }).endOf('year');\n            break;\n        default: \n            startDate = today.startOf('month');\n            endDate = today.endOf('month');\n            break;\n    }\n}\n\nconst filterConditions = {\n    filterType: reportType,\n    filterStartDate: startDate ? startDate.toISODate() : null, \n    filterEndDate: endDate ? endDate.toISODate() : null,   \n};\n\nreturn [{ json: filterConditions }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        832,
+        -272
+      ],
+      "id": "e944163e-a901-43ca-9648-1caf0f9501f5",
+      "name": "Prepare Filter"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n\nif (items.length === 0) {\n    return [{ json: { reportText: \"Tidak ada data transaksi yang ditemukan untuk periode dan tipe yang diminta.\" } }];\n}\n\nlet totalIncoming = 0;\nlet totalOutgoing = 0;\nlet incomingItems = {};\nlet outgoingItems = {};\nlet personsInvolved = new Set();\nlet uniqueItemNames = new Set();\nlet anomalies = [];\nlet reportPeriod = \"\";\n\nif ( $('Prepare Filter').first().json.filterStartDate && $('Prepare Filter').first().json.filterEndDate) {\n    const start = DateTime.fromISO($('Prepare Filter').first().json.filterStartDate);\n    const end = DateTime.fromISO($('Prepare Filter').first().json.filterEndDate);\n\n    if (start.hasSame(end, 'day')) {\n        reportPeriod = `pada tanggal ${start.toFormat('dd MMMM yyyy')}`;\n    } else if (start.hasSame(end, 'month') && start.startOf('month').equals(start) && end.endOf('month').equals(end)) {\n        reportPeriod = `pada bulan ${start.toFormat('MMMM yyyy')}`;\n    } else if (start.hasSame(end, 'year') && start.startOf('year').equals(start) && end.endOf('year').equals(end)) {\n        reportPeriod = `pada tahun ${start.toFormat('yyyy')}`;\n    } else {\n        reportPeriod = `antara ${start.toFormat('dd MMMM yyyy')} hingga ${end.toFormat('dd MMMM yyyy')}`;\n    }\n}\n\n\nfor (const item of items) {\n    const data = item.json;\n    uniqueItemNames.add(data.name);\n    personsInvolved.add(data.person);\n\n    if (data.type === 'incoming') {\n        totalIncoming += data.quantity;\n        incomingItems[data.name] = (incomingItems[data.name] || 0) + data.quantity;\n    } else if (data.type === 'outgoing') {\n        totalOutgoing += data.quantity;\n        outgoingItems[data.name] = (outgoingItems[data.name] || 0) + data.quantity;\n    }\n\n    if (data.quantity <= 0) {\n        anomalies.push(`Item '${data.name}' pada ${data.date} memiliki kuantitas ${data.quantity}.`);\n    }\n}\n\nlet summary = `Laporan Transaksi Gudang ${reportPeriod}\\n\\n`;\nsummary += `Ringkasan:\\n`;\nsummary += `- Jumlah total item masuk: ${totalIncoming} unit.\\n`;\nsummary += `- Jumlah total item keluar: ${totalOutgoing} unit.\\n`;\nsummary += `- Total jenis item unik yang tercatat: ${uniqueItemNames.size}.\\n`;\nsummary += `- Pihak yang terlibat: ${Array.from(personsInvolved).join(', ')}.\\n\\n`;\n\nsummary += `Analisis Saldo:\\n`;\nif (totalIncoming > totalOutgoing) {\n    summary += `- Stok kemungkinan bertambah sejumlah ${totalIncoming - totalOutgoing} unit (netto masuk).\\n`;\n} else if (totalOutgoing > totalIncoming) {\n    summary += `- Stok kemungkinan berkurang sejumlah ${totalOutgoing - totalIncoming} unit (netto keluar).\\n`;\n} else {\n    summary += `- Saldo masuk dan keluar seimbang untuk periode ini.\\n`;\n}\nsummary += `*Catatan: Analisis ini tidak mencerminkan stok awal atau akhir, hanya pergerakan selama periode laporan.*\\n\\n`;\n\nsummary += `Potensi Anomali:\\n`;\nif (anomalies.length > 0) {\n    anomalies.forEach(a => summary += `- ${a}\\n`);\n} else {\n    summary += `- Tidak ada anomali kuantitas (0 atau negatif) yang terdeteksi.\\n`;\n}\nsummary += `\\n`;\n\nsummary += `Saran Praktis:\\n`;\nsummary += `- Tinjau detail transaksi untuk item dengan kuantitas paling tinggi (masuk/keluar).\\n`;\nsummary += `- Pastikan semua kuantitas yang dicatat positif dan valid.\\n`;\nsummary += `- Untuk akurasi stok, disarankan untuk mengintegrasikan dengan sistem manajemen inventaris yang lebih komprehensif.\\n`;\n\nreturn [{ json: { reportText: summary } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1584,
+        -320
+      ],
+      "id": "97317a5c-72ad-479a-ae18-d70a72ddc196",
+      "name": "Resume"
+    },
+    {
+      "parameters": {
+        "chatId": "8421370372",
+        "text": "={{ $json.reportText }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1840,
+        -320
+      ],
+      "id": "6393c933-a0f1-47fb-a940-0556442daee6",
+      "name": "Send a text message1",
+      "webhookId": "b944a3e1-dd67-497d-9ef1-3ed4ecfca287",
+      "credentials": {
+        "telegramApi": {
+          "id": "SnOQYR1GAJqKIoVC",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const itemsFromGoogleSheets = $input.all();\n\nconst filterParams = $('Prepare Filter').item.json;\n\nconst reportType = filterParams.filterType;\nconst filterStartDate = new Date(filterParams.filterStartDate);\nconst filterEndDate = new Date(filterParams.filterEndDate);\n\nconst filteredItems = [];\n\nfor (const item of itemsFromGoogleSheets) {\n    if (!item.json.date || item.json.date === 'N/A') {\n        continue;\n    }\n\n    const itemDate = new Date(item.json.date);\n    const typeMatches = (reportType === 'all' || item.json.type === reportType);\n    const dateMatches = (itemDate >= filterStartDate && itemDate <= filterEndDate);\n\n    if (typeMatches && dateMatches) {\n        filteredItems.push({ json: item.json });\n    }\n}\n\nreturn filteredItems;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1280,
+        -272
+      ],
+      "id": "90ded0cf-3fea-4fce-8926-22cf6d2e7a1b",
+      "name": "Filtering",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1648,
+        -128
+      ],
+      "id": "cb02a9f7-1cc5-40dd-9d3c-5d129b1485a6",
+      "name": "Convert to File1"
+    },
+    {
+      "parameters": {
+        "operation": "sendDocument",
+        "chatId": "8421370372",
+        "binaryData": true,
+        "additionalFields": {
+          "caption": "={{ \"Berikut adalah laporan transaksi gudang Anda dalam format CSV untuk periode \" + $node[\"Prepare Filter\"].json.filterStartDate + \" hingga \" + $node[\"Prepare Filter\"].json.filterEndDate + \".\" }}\n",
+          "fileName": "={{ \"laporan Gudang \" + $node[\"Prepare Filter\"].json.filterStartDate + \" sampai \" + $node[\"Prepare Filter\"].json.filterEndDate + \".csv\" }}\n"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1872,
+        -128
+      ],
+      "id": "9bc8ffe1-acef-4a17-a23d-c69ff3d31850",
+      "name": "Send a document",
+      "webhookId": "a049e8c5-00c9-4e00-acf7-a5b399b1451b",
+      "credentials": {
+        "telegramApi": {
+          "id": "SnOQYR1GAJqKIoVC",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "LLM Report",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "LLM Append data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "LLM Append data",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "LLM Append data",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LLM Append data": {
+      "main": [
+        [
+          {
+            "node": "Validate Date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Date": {
+      "main": [
+        [
+          {
+            "node": "is valid ?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "is valid ?": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Invalid Format Massage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "LLM Report",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "LLM Report",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LLM Report": {
+      "main": [
+        [
+          {
+            "node": "Prepare Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Filtering",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Filter": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Resume": {
+      "main": [
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtering": {
+      "main": [
+        [
+          {
+            "node": "Resume",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Convert to File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File1": {
+      "main": [
+        [
+          {
+            "node": "Send a document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "9d0174e8-eb89-48f4-87c8-726c97b4718b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "765a7ea9d97b7a4b1162b58abf57889dabefa835daa9660da25a50fc644825ea"
+  },
+  "nodeGroups": [],
+  "id": "7QdO7c70cwxH4SXi",
+  "tags": []
+}

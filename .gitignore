@@ -1,0 +1,38 @@
+# ============================================================
+# n8n runtime data & secrets — JANGAN di-commit
+# ============================================================
+
+# Environment & kunci enkripsi instance
+.env
+.env.*
+!.env.example
+/config
+
+# Database SQLite n8n
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite-journal
+
+# Log runtime
+*.log
+n8nEventLog*.log
+
+# Binary data / execution data n8n
+/storage/
+.n8n/
+/home/node/.n8n/
+
+# Community nodes terpasang (isi node_modules)
+nodes/node_modules/
+nodes/*.tgz
+
+# ============================================================
+# OS & editor
+# ============================================================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~

@@ -1,0 +1,290 @@
+{
+  "name": "Minori Group - Otomasi Matching Kandidat & Reminder",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Minori Group - Otomasi Matching & Reminder\n**Cara pakai:** klik *Execute workflow* (Manual Trigger) untuk uji coba memakai data dummy.\nTanggal simulasi diatur di node **Data & Tanggal** (`SIMULASI_TANGGAL`, kosongkan untuk tanggal hari ini).\n\nNode **Kirim WhatsApp**, **Kirim Email**, **Kirim Laporan** sengaja *nonaktif* (dry-run). Aktifkan setelah mengisi token Fonnte / kredensial SMTP.",
+        "height": 200,
+        "width": 620,
+        "color": 4
+      },
+      "id": "48c0641f-f2b0-4a93-a45f-11cb447e34fb",
+      "name": "Catatan -260_-260",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -260,
+        -260
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "173721d5-2c6c-4034-a75d-0d47b461511b",
+      "name": "Uji Coba Manual",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * *"
+            }
+          ]
+        }
+      },
+      "id": "249c1d0b-15f2-4b7f-9b65-34a89f4ba458",
+      "name": "Jadwal Harian 08:00 WIB",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ====== DATA DUMMY (5 kandidat, 3 lowongan) ======\n// Di produksi: ganti node ini dengan node Google Sheets (baca sheet \"kandidat\" dan \"lowongan\").\nconst SIMULASI_TANGGAL = '2026-10-09'; // kosongkan ('') agar memakai tanggal hari ini (WIB)\n\nconst candidates = [\n  {\n    \"id\": \"C001\",\n    \"nama\": \"Andi Pratama\",\n    \"usia\": 24,\n    \"gender\": \"L\",\n    \"sertifikasi\": \"SSW-Pertanian\",\n    \"jlpt\": \"N4\",\n    \"kesehatan\": \"sehat\",\n    \"pengalaman_thn\": 2,\n    \"phone\": \"6281200000001\",\n    \"email\": \"andi.pratama@example.com\",\n    \"tahap\": \"Wawancara\",\n    \"lowongan_dilamar\": \"J01\",\n    \"interview_tgl\": \"2026-10-12\",\n    \"interview_jam\": \"10:00\",\n    \"interview_link\": \"https://zoom.example.com/j/111\",\n    \"medical_tgl\": \"2026-10-23\",\n    \"medical_tempat\": \"RS Medika Surabaya\",\n    \"dokumen_tenggat\": \"2026-10-19\",\n    \"dokumen_nama\": \"Paspor & Ijazah\"\n  },\n  {\n    \"id\": \"C002\",\n    \"nama\": \"Siti Rahma\",\n    \"usia\": 27,\n    \"gender\": \"P\",\n    \"sertifikasi\": \"SSW-Kaigo\",\n    \"jlpt\": \"N4\",\n    \"kesehatan\": \"sehat\",\n    \"pengalaman_thn\": 3,\n    \"phone\": \"6281200000002\",\n    \"email\": \"siti.rahma@example.com\",\n    \"tahap\": \"Medical Check-up\",\n    \"lowongan_dilamar\": \"J02\",\n    \"interview_tgl\": \"2026-10-05\",\n    \"interview_jam\": \"13:00\",\n    \"interview_link\": \"https://zoom.example.com/j/222\",\n    \"medical_tgl\": \"2026-10-10\",\n    \"medical_tempat\": \"Klinik Sehat Jakarta\",\n    \"dokumen_tenggat\": \"2026-10-16\",\n    \"dokumen_nama\": \"Surat Keterangan Kerja & KK\"\n  },\n  {\n    \"id\": \"C003\",\n    \"nama\": \"Budi Santoso\",\n    \"usia\": 31,\n    \"gender\": \"L\",\n    \"sertifikasi\": \"SSW-Food\",\n    \"jlpt\": \"N5\",\n    \"kesehatan\": \"sehat\",\n    \"pengalaman_thn\": 1,\n    \"phone\": \"6281200000003\",\n    \"email\": \"budi.santoso@example.com\",\n    \"tahap\": \"Pemberkasan\",\n    \"lowongan_dilamar\": \"J03\",\n    \"interview_tgl\": \"2026-10-02\",\n    \"interview_jam\": \"09:00\",\n    \"interview_link\": \"https://zoom.example.com/j/333\",\n    \"medical_tgl\": \"2026-10-06\",\n    \"medical_tempat\": \"Klinik Sehat Jakarta\",\n    \"dokumen_tenggat\": \"2026-10-12\",\n    \"dokumen_nama\": \"Paspor & Foto 4x6\"\n  },\n  {\n    \"id\": \"C004\",\n    \"nama\": \"Dewi Lestari\",\n    \"usia\": 22,\n    \"gender\": \"P\",\n    \"sertifikasi\": \"\",\n    \"jlpt\": \"N5\",\n    \"kesehatan\": \"sehat\",\n    \"pengalaman_thn\": 0,\n    \"phone\": \"6281200000004\",\n    \"email\": \"dewi.lestari@example.com\",\n    \"tahap\": \"Screening\",\n    \"lowongan_dilamar\": \"\",\n    \"interview_tgl\": \"\",\n    \"interview_jam\": \"\",\n    \"interview_link\": \"\",\n    \"medical_tgl\": \"\",\n    \"medical_tempat\": \"\",\n    \"dokumen_tenggat\": \"\",\n    \"dokumen_nama\": \"\"\n  },\n  {\n    \"id\": \"C005\",\n    \"nama\": \"Rizky Hidayat\",\n    \"usia\": 36,\n    \"gender\": \"L\",\n    \"sertifikasi\": \"SSW-Pertanian\",\n    \"jlpt\": \"N3\",\n    \"kesehatan\": \"perlu_review\",\n    \"pengalaman_thn\": 5,\n    \"phone\": \"6281200000005\",\n    \"email\": \"rizky.hidayat@example.com\",\n    \"tahap\": \"Wawancara\",\n    \"lowongan_dilamar\": \"J03\",\n    \"interview_tgl\": \"2026-10-10\",\n    \"interview_jam\": \"14:00\",\n    \"interview_link\": \"https://zoom.example.com/j/555\",\n    \"medical_tgl\": \"\",\n    \"medical_tempat\": \"\",\n    \"dokumen_tenggat\": \"2026-10-20\",\n    \"dokumen_nama\": \"Paspor & SKCK\"\n  }\n];\nconst jobs = [\n  {\n    \"id\": \"J01\",\n    \"perusahaan\": \"Hokkaido Agri Kumiai (Hokkaido)\",\n    \"bidang\": \"Pertanian\",\n    \"usia_min\": 18,\n    \"usia_max\": 35,\n    \"usia_ideal_min\": 20,\n    \"usia_ideal_max\": 30,\n    \"gender\": \"L\",\n    \"sertifikasi\": \"SSW-Pertanian\",\n    \"sertifikasi_wajib\": \"ya\",\n    \"jlpt_min\": \"N5\",\n    \"kuota\": 3\n  },\n  {\n    \"id\": \"J02\",\n    \"perusahaan\": \"Osaka Sakura Care Home (Osaka)\",\n    \"bidang\": \"Kaigo (Perawat Lansia)\",\n    \"usia_min\": 20,\n    \"usia_max\": 35,\n    \"usia_ideal_min\": 22,\n    \"usia_ideal_max\": 32,\n    \"gender\": \"any\",\n    \"sertifikasi\": \"SSW-Kaigo\",\n    \"sertifikasi_wajib\": \"ya\",\n    \"jlpt_min\": \"N4\",\n    \"kuota\": 2\n  },\n  {\n    \"id\": \"J03\",\n    \"perusahaan\": \"Aichi Fresh Food Factory (Aichi)\",\n    \"bidang\": \"Pengolahan Makanan\",\n    \"usia_min\": 18,\n    \"usia_max\": 40,\n    \"usia_ideal_min\": 20,\n    \"usia_ideal_max\": 35,\n    \"gender\": \"any\",\n    \"sertifikasi\": \"SSW-Food\",\n    \"sertifikasi_wajib\": \"tidak\",\n    \"jlpt_min\": \"N5\",\n    \"kuota\": 5\n  }\n];\n\nlet today = SIMULASI_TANGGAL;\nif (!today) {\n  const wib = new Date(Date.now() + 7 * 3600 * 1000);\n  today = wib.toISOString().slice(0, 10);\n}\nreturn [{ json: { today, candidates, jobs } }];\n"
+      },
+      "id": "721ad15c-35dd-4f2b-b81b-7f9746061d52",
+      "name": "Data & Tanggal",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        260,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ====== MATCHING ENGINE: rule-based scoring ======\nconst WEIGHTS = { sertifikasi: 30, bahasa: 30, usia: 15, kesehatan: 15, pengalaman: 10 }; // total 100\nconst THRESHOLDS = [[75, 'Sangat Cocok'], [60, 'Cocok'], [0, 'Kurang Cocok']];\nconst JLPT = { N5: 1, N4: 2, N3: 3, N2: 4, N1: 5 };\nconst label = (s) => THRESHOLDS.find(([t]) => s >= t)[1];\n\nconst d = $input.first().json;\n\nfunction score(c, j) {\n  const certs = c.sertifikasi ? c.sertifikasi.split(';') : [];\n  const lvl = JLPT[c.jlpt] || 0;\n  const minLvl = JLPT[j.jlpt_min];\n  const gugur = [];\n\n  // --- Lapis 1: syarat mutlak (knock-out) ---\n  if (!(c.usia >= j.usia_min && c.usia <= j.usia_max)) gugur.push(`usia ${c.usia} di luar rentang ${j.usia_min}-${j.usia_max}`);\n  if (j.gender !== 'any' && c.gender !== j.gender) gugur.push('jenis kelamin tidak sesuai syarat');\n  if (j.sertifikasi_wajib === 'ya' && !certs.includes(j.sertifikasi)) gugur.push(`belum memiliki sertifikat wajib ${j.sertifikasi}`);\n  if (lvl < minLvl) gugur.push(`JLPT ${c.jlpt} di bawah minimum ${j.jlpt_min}`);\n  if (c.kesehatan === 'tidak_fit') gugur.push('hasil kesehatan tidak memenuhi syarat');\n  if (gugur.length) return { eligible: false, skor: 0, bd: {}, gugur };\n\n  // --- Lapis 2: skor berbobot ---\n  const bd = {};\n  bd.sertifikasi = certs.includes(j.sertifikasi) ? WEIGHTS.sertifikasi : (certs.length ? Math.round(WEIGHTS.sertifikasi / 3) : 0);\n  const extra = Math.min(lvl - minLvl, 1);\n  bd.bahasa = Math.round(WEIGHTS.bahasa * (2 / 3 + extra / 3));\n  const ideal = c.usia >= j.usia_ideal_min && c.usia <= j.usia_ideal_max;\n  bd.usia = ideal ? WEIGHTS.usia : Math.round(WEIGHTS.usia / 2);\n  bd.kesehatan = c.kesehatan === 'sehat' ? WEIGHTS.kesehatan : Math.round(WEIGHTS.kesehatan / 2);\n  bd.pengalaman = Math.round(WEIGHTS.pengalaman * Math.min(c.pengalaman_thn, 3) / 3);\n  const skor = Object.values(bd).reduce((a, b) => a + b, 0);\n  return { eligible: true, skor, bd, gugur: [] };\n}\n\nconst matches = [];\nfor (const c of d.candidates) {\n  for (const j of d.jobs) {\n    const r = score(c, j);\n    matches.push({\n      kandidat_id: c.id, kandidat: c.nama, lowongan_id: j.id, perusahaan: j.perusahaan,\n      eligible: r.eligible ? 'ya' : 'tidak',\n      skor: r.skor,\n      kategori: r.eligible ? label(r.skor) : 'Tidak Memenuhi Syarat',\n      rincian: Object.entries(r.bd).map(([k, v]) => `${k}=${v}`).join('; '),\n      catatan: r.gugur.join('; ') + (r.eligible && c.kesehatan === 'perlu_review' ? ' | perlu review manual kesehatan' : ''),\n    });\n  }\n}\nreturn [{ json: { ...d, matches } }];\n"
+      },
+      "id": "09f541d2-2988-45a9-bf13-9a8ccf3ab9c1",
+      "name": "Matching Engine",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// ====== TRIGGER REMINDER: cek H-n + cegah kirim ganda ======\nconst REMINDER_RULES = { interview: [3, 1], medical: [3, 1], dokumen: [7, 3, 1] };\nconst HARI = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];\nconst BULAN = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];\nconst tgl = (s) => { const t = new Date(s + 'T00:00:00Z'); return `${HARI[t.getUTCDay()]}, ${t.getUTCDate()} ${BULAN[t.getUTCMonth() + 1]} ${t.getUTCFullYear()}`; };\nconst diff = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 86400000);\nconst waktu = (n) => (n === 1 ? 'BESOK' : `${n} hari lagi`);\n\nconst d = $input.first().json;\nconst jobsById = Object.fromEntries(d.jobs.map((j) => [j.id, j]));\n\n// Log pengiriman (tersimpan di workflow static data; aktif saat workflow di-Activate)\nconst sd = $getWorkflowStaticData('global');\nsd.sentLog = sd.sentLog || {};\n\nfunction pesan(c, job, stage, date, n) {\n  const nama = c.nama.split(' ')[0];\n  const perusahaan = job ? job.perusahaan : 'perusahaan penerima';\n  let subject, isi;\n  if (stage === 'interview') {\n    subject = `[Minori Group] Pengingat Wawancara H-${n}`;\n    isi = `Wawancara dengan ${perusahaan} akan dilaksanakan ${waktu(n)}:\\n📅 ${tgl(date)}\\n🕐 ${c.interview_jam} WIB\\n🔗 ${c.interview_link}\\n\\nPersiapan: pelajari profil perusahaan, latih jikoshoukai (perkenalan diri), pakai pakaian rapi, dan tes koneksi internet 30 menit sebelumnya.`;\n  } else if (stage === 'medical') {\n    subject = `[Minori Group] Pengingat Medical Check-up H-${n}`;\n    isi = `Medical check-up Anda akan dilaksanakan ${waktu(n)}:\\n📅 ${tgl(date)}\\n📍 ${c.medical_tempat}\\n\\nPersiapan: puasa 8-10 jam sebelum pemeriksaan, bawa KTP/paspor, dan jangan lupa istirahat cukup malam sebelumnya.`;\n  } else {\n    subject = `[Minori Group] Tenggat Dokumen H-${n}`;\n    isi = `Tenggat pengumpulan dokumen ${waktu(n)}:\\n📅 ${tgl(date)}\\n📄 Dokumen: ${c.dokumen_nama}\\n\\nMohon kirim ke tim penempatan sebelum tenggat. Dokumen terlambat dapat menunda jadwal keberangkatan Anda.`;\n  }\n  const whatsapp = `Halo ${nama} 👋, ini pengingat otomatis dari *Minori Group*.\\n\\n${isi}\\n\\nBalas pesan ini bila ada kendala. Semangat! 💪`;\n  const email_body = `Yth. ${c.nama},\\n\\n${isi}\\n\\nSalam,\\nTim Penempatan Minori Group`;\n  return { subject, whatsapp, email_body };\n}\n\nconst reminders = [];\nlet dilewati = 0;\nfor (const c of d.candidates) {\n  const job = jobsById[c.lowongan_dilamar];\n  const tahap = { interview: c.interview_tgl, medical: c.medical_tgl, dokumen: c.dokumen_tenggat };\n  for (const [stage, date] of Object.entries(tahap)) {\n    if (!date) continue;\n    const n = diff(d.today, date);\n    if (!REMINDER_RULES[stage].includes(n)) continue;\n    const kunci = `${c.id}|${stage}|H-${n}|${date}`;\n    if (sd.sentLog[kunci]) { dilewati++; continue; }          // sudah pernah dikirim\n    sd.sentLog[kunci] = new Date().toISOString();\n    reminders.push({\n      kunci, kandidat: c.nama, phone: c.phone, email_to: c.email,\n      tahap: stage, offset: `H-${n}`, tanggal_tahap: date, ...pesan(c, job, stage, date, n),\n    });\n  }\n}\nreturn [{ json: { ...d, reminders, dilewati } }];\n"
+      },
+      "id": "f5c8ae6b-271a-49ae-9bac-4a91841bdda5",
+      "name": "Trigger Reminder",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "reminders",
+        "options": {}
+      },
+      "id": "ba6994cc-bd6f-4c48-b876-1bbb626d0fb2",
+      "name": "Pisah Per Reminder",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.fonnte.com/send",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "ISI_TOKEN_FONNTE_DI_SINI"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "target",
+              "value": "={{ $json.phone }}"
+            },
+            {
+              "name": "message",
+              "value": "={{ $json.whatsapp }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "d40112bf-08d5-46ba-b2fc-4f1545b943f0",
+      "name": "Kirim WhatsApp (Fonnte)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1300,
+        -100
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fromEmail": "noreply@minorigroup.example",
+        "toEmail": "={{ $json.email_to }}",
+        "subject": "={{ $json.subject }}",
+        "emailFormat": "text",
+        "text": "={{ $json.email_body }}",
+        "options": {}
+      },
+      "id": "90a97efc-e49e-450a-8862-6d4e5a081a91",
+      "name": "Kirim Email Kandidat",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1300,
+        100
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// ====== LAPORAN MANAJEMEN (Markdown) ======\nconst HARI = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];\nconst BULAN = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];\nconst tgl = (s) => { const t = new Date(s + 'T00:00:00Z'); return `${HARI[t.getUTCDay()]}, ${t.getUTCDate()} ${BULAN[t.getUTCMonth() + 1]} ${t.getUTCFullYear()}`; };\nconst diff = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 86400000);\n\nconst d = $input.first().json;\nconst best = (id) => {\n  const m = d.matches.filter((r) => r.kandidat_id === id && r.eligible === 'ya');\n  return m.length ? m.reduce((a, b) => (b.skor > a.skor ? b : a)) : null;\n};\n\nconst L = [];\nL.push(`# Laporan Progres Penempatan - ${tgl(d.today)}\\n`);\nL.push('## Ringkasan\\n');\nL.push(`- Total kandidat aktif: **${d.candidates.length}**`);\nL.push(`- Total lowongan terbuka: **${d.jobs.length}**`);\nL.push(`- Reminder dibuat hari ini: **${d.reminders.length}**\\n`);\n\nL.push('## Kandidat per Tahap\\n');\nL.push('| Tahap | Jumlah |\\n|---|---|');\nconst perTahap = {};\nd.candidates.forEach((c) => { perTahap[c.tahap] = (perTahap[c.tahap] || 0) + 1; });\nObject.entries(perTahap).forEach(([t, n]) => L.push(`| ${t} | ${n} |`));\n\nL.push('\\n## Rekomendasi Lowongan Terbaik per Kandidat\\n');\nL.push('| Kandidat | Tahap | Lowongan Terbaik | Skor | Kategori |\\n|---|---|---|---|---|');\nd.candidates.forEach((c) => {\n  const b = best(c.id);\n  L.push(b ? `| ${c.nama} | ${c.tahap} | ${b.perusahaan} | ${b.skor} | ${b.kategori} |`\n           : `| ${c.nama} | ${c.tahap} | - (belum ada yang memenuhi syarat) | 0 | Perlu pembinaan |`);\n});\n\nL.push('\\n## Perlu Perhatian Staf\\n');\nconst flags = [];\nd.candidates.forEach((c) => {\n  if (c.kesehatan === 'perlu_review') flags.push(`- **${c.nama}**: catatan kesehatan perlu review manual.`);\n  if (!best(c.id)) flags.push(`- **${c.nama}**: belum cocok dengan lowongan mana pun - sarankan pelatihan sertifikasi/bahasa.`);\n});\nL.push(flags.length ? flags.join('\\n') : '- Tidak ada.');\n\nL.push('\\n## Agenda 7 Hari ke Depan\\n');\nL.push('| Tanggal | Kandidat | Agenda |\\n|---|---|---|');\nconst agenda = [];\nd.candidates.forEach((c) => {\n  [['Wawancara', c.interview_tgl], ['Medical check-up', c.medical_tgl], ['Tenggat dokumen', c.dokumen_tenggat]].forEach(([a, dt]) => {\n    if (dt) { const n = diff(d.today, dt); if (n >= 0 && n <= 7) agenda.push([dt, c.nama, a]); }\n  });\n});\nagenda.sort().forEach(([dt, n, a]) => L.push(`| ${tgl(dt)} | ${n} | ${a} |`));\n\nL.push('\\n## Reminder Dibuat Hari Ini\\n');\nL.push('| Kandidat | Tahap | Trigger |\\n|---|---|---|');\nd.reminders.forEach((r) => L.push(`| ${r.kandidat} | ${r.tahap} | ${r.offset} |`));\n\nreturn [{ json: { report: L.join('\\n') + '\\n', tanggal: d.today } }];\n"
+      },
+      "id": "e894b051-6308-4f09-8d2d-c063df087754",
+      "name": "Laporan Manajemen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1040,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "noreply@minorigroup.example",
+        "toEmail": "manajemen@minorigroup.example",
+        "subject": "=Laporan Progres Penempatan - {{ $json.tanggal }}",
+        "emailFormat": "text",
+        "text": "={{ $json.report }}",
+        "options": {}
+      },
+      "id": "f975d95d-a14b-4e0c-af1d-8547138cd6d6",
+      "name": "Kirim Laporan ke Manajemen",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1300,
+        280
+      ],
+      "disabled": true
+    }
+  ],
+  "connections": {
+    "Uji Coba Manual": {
+      "main": [
+        [
+          {
+            "node": "Data & Tanggal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Jadwal Harian 08:00 WIB": {
+      "main": [
+        [
+          {
+            "node": "Data & Tanggal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data & Tanggal": {
+      "main": [
+        [
+          {
+            "node": "Matching Engine",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Matching Engine": {
+      "main": [
+        [
+          {
+            "node": "Trigger Reminder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trigger Reminder": {
+      "main": [
+        [
+          {
+            "node": "Pisah Per Reminder",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Laporan Manajemen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pisah Per Reminder": {
+      "main": [
+        [
+          {
+            "node": "Kirim WhatsApp (Fonnte)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Kirim Email Kandidat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Laporan Manajemen": {
+      "main": [
+        [
+          {
+            "node": "Kirim Laporan ke Manajemen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Jakarta"
+  },
+  "tags": []
+}

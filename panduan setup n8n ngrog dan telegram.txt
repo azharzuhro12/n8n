@@ -1,0 +1,66 @@
+Panduan Setup n8n + ngrok di Ubuntu via Docker
+🔗 Tautan Referensi Penting:
+Dashboard ngrok: dashboard.ngrok.com (untuk mengambil Authtoken & Static Domain)
+
+n8n di Docker Hub: hub.docker.com/r/n8nio/n8n
+
+BotFather Telegram: t.me/BotFather (untuk membuat bot Telegram)
+
+Akses n8n Anda: https://mercenarily-photogenic-shirley.ngrok-free.app
+
+1. Persiapan Folder Penyimpanan
+Buat folder di Ubuntu untuk menyimpan data n8n agar tidak hilang saat container di-restart.
+
+Buka Terminal.
+
+Buat folder di Documents: mkdir -p ~/Documents/n8n
+
+2. Konfigurasi ngrok (Terminal 1)
+Login ke akun ngrok Anda di dashboard.ngrok.com.
+
+Klaim domain statis gratis di menu Deploy your app online > Static Domain (domain Anda: mercenarily-photogenic-shirley.ngrok-free.app).
+
+Buka Terminal 1 dan jalankan ngrok dengan port 5678:
+
+Bash
+ngrok http --domain=mercenarily-photogenic-shirley.ngrok-free.app 5678
+Catatan: Biarkan Terminal 1 ini tetap terbuka (running) selama Anda menggunakan n8n.
+
+3. Cek Port Docker (Terminal 2)
+Pastikan port 5678 tidak sedang dipakai oleh container n8n versi sebelumnya.
+
+Buka Terminal baru (Terminal 2).
+
+Cek container yang sedang berjalan: sudo docker ps
+
+Jika ada container n8n lama yang menyala, hentikan dan hapus terlebih dahulu:
+
+sudo docker stop n8n
+
+sudo docker rm n8n
+
+4. Jalankan n8n via Docker (Terminal 2)
+Copy-paste perintah berikut di Terminal 2 untuk menjalankan n8n dengan konfigurasi webhook ngrok Anda:
+
+Bash
+sudo docker run -d \
+  --name n8n_tutorial \
+  -p 5678:5678 \
+  -v ~/Documents/n8n:/home/node/.n8n \
+  -e N8N_COMMUNITY_PACKAGES_ALLOW=true \
+  -e N8N_EDITOR_BASE_URL=https://mercenarily-photogenic-shirley.ngrok-free.app \
+  -e WEBHOOK_URL=https://mercenarily-photogenic-shirley.ngrok-free.app \
+  -e N8N_DEFAULT_BINARY_DATA_MODE=filesystem \
+  n8nio/n8n
+5. Akses dan Pengujian
+Buka browser dan klik tautan ngrok Anda: https://mercenarily-photogenic-shirley.ngrok-free.app
+
+Buat akun pemilik (owner account) saat pertama kali membuka n8n.
+
+Coba buat Workflow baru menggunakan Telegram Trigger (bisa minta token bot baru ke BotFather).
+
+Webhook URL di dalam konfigurasi node tersebut sekarang akan otomatis menggunakan alamat HTTPS dari ngrok yang ama
+
+nyalain: 
+1.ngrok http --domain=mercenarily-photogenic-shirley.ngrok-free.app 5678
+2.sudo docker start n8n_tutorial
